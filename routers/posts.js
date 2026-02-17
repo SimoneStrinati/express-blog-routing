@@ -2,8 +2,6 @@ const express = require('express')
 const router = express.Router();
 
 
-//Index
-router.get('/', (req, res) => {
 const posts = [
   {
     id: 1,
@@ -50,12 +48,17 @@ const posts = [
   },
 ];
 
+//Index
+router.get('/', (req, res) => {
+
+
 res.json(posts);
 })
 
 //Show
 router.get('/:id', (req, res) => {
-	res.send(`Mostra post con id: ${req.params.id}`);
+ const risultati = posts.find(post => post.id == req.params.id)
+	res.json(risultati);
 })
 
 //Store 
