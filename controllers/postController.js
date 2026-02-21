@@ -6,21 +6,32 @@ function index(req, res) {
 };
 
 
-function show (req, res) {
- const risultati = posts.find(post => post.id == req.params.id)
-	res.json(risultati);
+function show(req, res) {
+    const id = Number(req.params.id);
+
+    const risultati = posts.find(post => post.id == id)
+    res.json(risultati);
 };
 
-function store (req, res) {
-	res.send(`Vuoi creare un nuovo post`);
+function store(req, res) {
+    res.send(`Vuoi creare un nuovo post`);
 };
 
-function update (req, res) {
-	res.send(`Vuoi modificare totalmente il post con id: ${req.params.id}`);
+function update(req, res) {
+    res.send(`Vuoi modificare totalmente il post con id: ${req.params.id}`);
 };
 
-function destroy (req, res) {
-	res.send(`Vuoi cancellare il post con id: ${req.params.id}`);
+function destroy(req, res) {
+
+    const id = Number(req.params.id);
+
+    const risultati = posts.find(post => post.id == id);
+
+    posts.splice(posts.indexOf(risultati), 1);
+
+    console.log(`Hai eliminato il post: ${id}`, posts);
+
+    res.sendStatus(204);
 };
 
 const controllers = {
