@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.use("/posts/", postsRouter)
+app.use("/posts", postsRouter)
 
 app.listen(port, () => {
  console.log(`Example app listening on http://localhost:${port}/`)
