@@ -2,15 +2,22 @@ const posts = require("../data/posts")
 
 function index(req, res) {
 
-    res.json(posts);
+    let risultati = posts
+
+    if (req.query.tags) {
+
+        risultati = posts.filter(post => post.tags.map(tag => tag.toLowerCase()).includes(req.query.tags.toLowerCase()));
+    }
+
+    res.json(risultati);
 };
 
 
 function show(req, res) {
     const id = Number(req.params.id);
 
-    const risultati = posts.find(post => post.id == id)
-    res.json(risultati);
+    const risultato = posts.find(post => post.id == id)
+    res.json(risultato);
 };
 
 function store(req, res) {
@@ -25,9 +32,9 @@ function destroy(req, res) {
 
     const id = Number(req.params.id);
 
-    const risultati = posts.find(post => post.id == id);
+    const risultato = posts.find(post => post.id == id);
 
-    posts.splice(posts.indexOf(risultati), 1);
+    posts.splice(posts.indexOf(risultato), 1);
 
     console.log(`Hai eliminato il post: ${id}`, posts);
 
