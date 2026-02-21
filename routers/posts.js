@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-
+const postController = require("../controllers/postController");
 
 const posts = [
   {
@@ -49,33 +49,19 @@ const posts = [
 ];
 
 //Index
-router.get('/', (req, res) => {
-
-
-res.json(posts);
-})
+router.get('/', postController.index);
 
 //Show
-router.get('/:id', (req, res) => {
- const risultati = posts.find(post => post.id == req.params.id)
-	res.json(risultati);
-})
+router.get('/:id', postController.show);
 
 //Store 
-router.post('/', (req, res) => {
-	res.send(`Vuoi creare un nuovo post`);
-})
+router.post('/', postController.store);
 
 //Update 
-router.put('/:id', (req, res) => {
-	res.send(`Vuoi modificare totalmente il post con id: ${req.params.id}`);
-})
-
+router.put('/:id',postController.update); 
 
 //Delete
-router.delete('/:id', (req, res) => {
-	res.send(`Vuoi cancellare il post con id: ${req.params.id}`);
-})
+router.delete('/:id',postController.destroy);
 
 
 module.exports = router;
