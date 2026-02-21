@@ -1,7 +1,10 @@
+const posts = require("../data/posts")
+
 function index(req, res) {
 
     res.json(posts);
 };
+
 
 function show (req, res) {
  const risultati = posts.find(post => post.id == req.params.id)
@@ -28,5 +31,5 @@ const controllers = {
     destroy
 };
 
-module.express = controllers;
+module.exports = controllers;
 
