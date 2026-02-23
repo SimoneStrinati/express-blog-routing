@@ -6,7 +6,7 @@ function index(req, res) {
 
     if (req.query.tags) {
 
-        risultati = posts.filter(post => post.tags.map(tag => tag.toLowerCase()).includes(req.query.tags.toLowerCase()));
+        risultati = posts.filter(post => post.tags.find(tag => tag.toLowerCase()===req.query.tags.toLowerCase()));
     }
 
     res.json(risultati);
