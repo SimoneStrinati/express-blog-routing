@@ -28,7 +28,10 @@ function show(req, res) {
 function store(req, res) {
     // console.log(req.body);
 
+    const newId = Math.max(0, ...posts.map(post => post.id)) + 1;
+
     const newPost = {
+        id: newId, //l'ID non dobbiamo scriverlo noi in realtà, perché sarà il database a crearlo per noi.
         title: req.body.title,
         content: req.body.content,
         image: req.body.image,
