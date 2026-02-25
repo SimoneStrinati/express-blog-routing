@@ -19,7 +19,7 @@ function show(req, res) {
     const risultato = posts.find(post => post.id == id)
 
     if (!risultato) {
-        res.status(404).res.json({ error: "Not Found", message: "Post non trovato"});
+        res.status(404).res.json({ error: "Not Found", message: "Post non trovato" });
     }
 
     res.json(risultato);
@@ -42,13 +42,22 @@ function store(req, res) {
 
 function update(req, res) {
 
-
     const id = Number(req.params.id);
 
     const risultato = posts.find(post => post.id == id)
-    res.json(risultato);
 
-    res.send(`Vuoi modificare totalmente il post con id: ${req.params.id}`);
+    if (!risultato) {
+        res.status(404).res.json({ error: "Not Found", message: "Post non trovato" });
+    }
+
+    risultato.title = req.body.title;
+    risultato.content = req.body.content;
+    risultato.image = req.body.image;
+    risultato.tags = req.body.tags
+
+    res.json(risultato);
+    
+    
 };
 
 function destroy(req, res) {
