@@ -6,7 +6,7 @@ function index(req, res) {
 
     if (req.query.tags) {
 
-        risultati = posts.filter(post => post.tags.find(tag => tag.toLowerCase()===req.query.tags.toLowerCase()));
+        risultati = posts.filter(post => post.tags.find(tag => tag.toLowerCase() === req.query.tags.toLowerCase()));
     }
 
     res.json(risultati);
@@ -17,6 +17,11 @@ function show(req, res) {
     const id = Number(req.params.id);
 
     const risultato = posts.find(post => post.id == id)
+
+    if (!risultato) {
+        res.status(404).res.json({ error: "Not Found", message: "Post non trovato"});
+    }
+
     res.json(risultato);
 };
 
@@ -36,6 +41,13 @@ function store(req, res) {
 };
 
 function update(req, res) {
+
+
+    const id = Number(req.params.id);
+
+    const risultato = posts.find(post => post.id == id)
+    res.json(risultato);
+
     res.send(`Vuoi modificare totalmente il post con id: ${req.params.id}`);
 };
 
