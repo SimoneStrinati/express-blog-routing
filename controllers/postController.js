@@ -21,8 +21,18 @@ function show(req, res) {
 };
 
 function store(req, res) {
-    console.log(req.body);
-    res.send(`Vuoi creare un nuovo post`);
+    // console.log(req.body);
+
+    const newPost = {
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+        tags: req.body.tags
+    };
+
+    posts.push(newPost);
+
+    res.status(201).json(newPost)
 };
 
 function update(req, res) {
