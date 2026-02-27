@@ -14,10 +14,13 @@ router.get('/:id', postController.show);
 router.post('/', postController.store);
 
 //Update 
-router.put('/:id',postController.update); 
+router.put('/:id', postController.update); 
+
+//Modify
+router.patch('/:id', postController.modify);
 
 //Delete
-router.delete('/:id',postController.destroy);
+router.delete('/:id', postController.destroy);
 
 
 module.exports = router;

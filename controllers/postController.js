@@ -21,7 +21,7 @@ const controllers = {
         const risultato = posts.find(post => post.id == id)
 
         if (!risultato) {
-            res.status(404).res.json({ error: "Not Found", message: "Post non trovato" });
+            res.status(404).json({ error: "Not Found", message: "Post non trovato" });
         }
 
         res.json(risultato);
@@ -52,7 +52,7 @@ const controllers = {
         const risultato = posts.find(post => post.id == id)
 
         if (!risultato) {
-            res.status(404).res.json({ error: "Not Found", message: "Post non trovato" });
+           return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
         }
 
         risultato.title = req.body.title;
@@ -62,6 +62,28 @@ const controllers = {
 
         res.json(risultato);
 
+
+    },
+
+    modify: function (req, res) {
+
+        const id = Number(req.params.id);
+
+        const risultato = posts.find(post => post.id == id)
+
+        if (!risultato) {
+           return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
+        }
+
+        const allowedProperties = ["title", "content", "image", "tags"]
+
+        for (const propertyName of allowedProperties) {
+            if (req.body[propertyName] !== undefined) {
+                risultato[propertyName] = req.body[propertyName]
+            }
+        }
+
+        res.json(risultato);
 
     },
 
