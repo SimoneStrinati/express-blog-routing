@@ -1,5 +1,6 @@
 const express = require('express')
-const postsRouter = require("./routers/posts")
+const postsRouter = require("./routers/posts");
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express()
 const port = 3000
@@ -12,6 +13,8 @@ app.get('/', (req, res) => {
 })
 
 app.use("/posts", postsRouter)
+
+app.use(errorHandler)
 
 app.listen(port, () => {
  console.log(`Example app listening on http://localhost:${port}/`)

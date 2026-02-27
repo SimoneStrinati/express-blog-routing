@@ -7,6 +7,9 @@ const controllers = {
 
         let risultati = posts
 
+        niente.prova()//Test midddleware
+
+
         if (req.query.tags) {
 
             risultati = posts.filter(post => post.tags.find(tag => tag.toLowerCase() === req.query.tags.toLowerCase()));
@@ -52,7 +55,7 @@ const controllers = {
         const risultato = posts.find(post => post.id == id)
 
         if (!risultato) {
-           return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
+            return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
         }
 
         risultato.title = req.body.title;
@@ -72,7 +75,7 @@ const controllers = {
         const risultato = posts.find(post => post.id == id)
 
         if (!risultato) {
-           return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
+            return res.status(404).json({ error: "Not Found", message: "Post non trovato" });
         }
 
         const allowedProperties = ["title", "content", "image", "tags"]
